@@ -1,6 +1,7 @@
 #[macro_use] extern crate lazy_static;
 use std::num::NonZeroU32;
 use std::convert::TryInto;
+use std::collections::HashMap;
 
 #[derive(Eq, PartialEq, Hash, Copy, Clone, Debug)]
 pub enum Encoding {
@@ -134,4 +135,30 @@ fn test_forward() {
 #[test]
 fn test_reverse() {
     assert_eq!(UNICODE_TO_STANDARD.get(0x2014), Some(0xD0));
+}
+
+pub static GLYPH_LIST: &[(&'static str, &'static str)] = &include!(concat!(env!("OUT_DIR"), "/glyphlist.rs"));
+
+lazy_static! {
+    // glyph name -> unicode string
+    static ref UNICODE_MAP: HashMap<&'static str, &'static str> = {
+        GLYPH_LIST.iter().cloned().collect()
+    };
+}
+
+pub fn glyphname_to_unicode(name: &str) -> Option<&'static str> {
+    UNICODE_MAP.get(&name).cloned()
+}
+
+#[test]
+fn test_glyphname() {
+    let cases = [
+        ("a", "a"),
+        ("Alpha", "Α"),
+        ("gamma", "γ"),
+        ("qofhatafpatah", "קֲ")
+    ];
+    for &(glyph, unicode) in cases.iter() {
+        assert_eq!(glyphname_to_unicode(glyph), Some(unicode));
+    }
 }
