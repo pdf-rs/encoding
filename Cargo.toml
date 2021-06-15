@@ -1,6 +1,6 @@
 [package]
 name = "pdf_encoding"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Sebastian Köln <s3bk@protonmail.com>"]
 edition = "2018"
 license = "BSD-3-Clause"
