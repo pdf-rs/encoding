@@ -11,6 +11,7 @@ pub enum Encoding {
     AdobeSymbol,
     AdobeZdingbat,
     WinAnsiEncoding,
+    MacRomanEncoding,
 }
 
 pub enum Transcoder {
@@ -46,6 +47,7 @@ impl Encoding {
             Encoding::AdobeSymbol => Some(&SYMBOL),
             Encoding::AdobeZdingbat => Some(&ZDINGBAT),
             Encoding::WinAnsiEncoding => Some(&WINANSI),
+            Encoding::MacRomanEncoding => Some(&MACROMAN),
             _ => None
         }
     }
@@ -55,6 +57,7 @@ impl Encoding {
             Encoding::AdobeSymbol => Some(&UNICODE_TO_SYMBOL),
             Encoding::AdobeZdingbat => Some(&UNICODE_TO_ZDINGBAT),
             Encoding::WinAnsiEncoding => Some(&UNICODE_TO_WINANSI),
+            Encoding::MacRomanEncoding => Some(&UNICODE_TO_MACROMAN),
             _ => None
         }
     }
@@ -98,6 +101,7 @@ lazy_static! {
     static ref UNICODE_TO_SYMBOL: ReverseMap = ReverseMap::new(&SYMBOL);
     static ref UNICODE_TO_ZDINGBAT: ReverseMap = ReverseMap::new(&ZDINGBAT);
     static ref UNICODE_TO_WINANSI: ReverseMap = ReverseMap::new(&WINANSI);
+    static ref UNICODE_TO_MACROMAN: ReverseMap = ReverseMap::new(&MACROMAN);
 }
 
 #[derive(Copy, Clone)]
@@ -127,6 +131,7 @@ pub static STANDARD: ForwardMap = ForwardMap(include!("stdenc.rs"));
 pub static SYMBOL: ForwardMap = ForwardMap(include!("symbol.rs"));
 pub static ZDINGBAT: ForwardMap = ForwardMap(include!("zdingbat.rs"));
 pub static WINANSI: ForwardMap = ForwardMap(include!("cp1252.rs"));
+pub static MACROMAN: ForwardMap = ForwardMap(include!("macroman.rs"));
 
 #[test]
 fn test_forward() {
