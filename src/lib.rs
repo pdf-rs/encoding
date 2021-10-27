@@ -73,6 +73,44 @@ impl Encoding {
         }
     }
 }
+
+#[derive(Clone, Debug)]
+
+pub struct DifferenceForwardMap(HashMap<u8, String>);
+
+impl DifferenceForwardMap {
+    pub fn new(
+        base_map: Option<&'static ForwardMap>,
+        glyp_mapping: HashMap<u32, String>,
+    ) -> DifferenceForwardMap {
+        let map: HashMap<u8, String> = (0..=255 as u8)
+            .map(|i| (i, glyp_mapping.get(&(i as u32))))
+            .map(|(i, v)| {
+                if let Some(glyph_name) = v {
+                    (i, glyphname_to_unicode(glyph_name).map(|v| v.to_string()))
+                } else {
+                    (i, None)
+                }
+            })
+            .map(|(i, v)| {
+                if let (Some(base), None) = (base_map, &v) {
+                    (i, base.0[i as usize].map(|c| c.as_char().to_string()))
+                } else {
+                    (i, v)
+                }
+            })
+            .filter_map(|(i, v)| {
+                if let Some(a) = v { Some((i, a)) } else { None }
+            })
+            .collect();
+
+        DifferenceForwardMap(map)
+    }
+
+    pub fn get(&self, codepoint: u8) -> Option<&String> {
+        self.0.get(&codepoint)
+    }
+}
 pub struct ForwardMap([Option<Entry>; 256]);
 
 impl ForwardMap {
@@ -132,6 +170,7 @@ pub static SYMBOL: ForwardMap = ForwardMap(include!("symbol.rs"));
 pub static ZDINGBAT: ForwardMap = ForwardMap(include!("zdingbat.rs"));
 pub static WINANSI: ForwardMap = ForwardMap(include!("cp1252.rs"));
 pub static MACROMAN: ForwardMap = ForwardMap(include!("macroman.rs"));
+
 
 #[test]
 fn test_forward() {
