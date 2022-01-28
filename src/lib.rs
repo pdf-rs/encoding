@@ -44,6 +44,7 @@ impl Encoding {
     pub fn forward_map(self) -> Option<&'static ForwardMap> {
         match self {
             Encoding::AdobeStandard => Some(&STANDARD),
+            Encoding::AdobeExpert => Some(&MACEXPERT),
             Encoding::AdobeSymbol => Some(&SYMBOL),
             Encoding::AdobeZdingbat => Some(&ZDINGBAT),
             Encoding::WinAnsiEncoding => Some(&WINANSI),
@@ -54,6 +55,7 @@ impl Encoding {
     pub fn reverse_map(self) -> Option<&'static ReverseMap> {
         match self {
             Encoding::AdobeStandard => Some(&UNICODE_TO_STANDARD),
+            Encoding::AdobeExpert => Some(&UNICODE_TO_MACEXPERT),
             Encoding::AdobeSymbol => Some(&UNICODE_TO_SYMBOL),
             Encoding::AdobeZdingbat => Some(&UNICODE_TO_ZDINGBAT),
             Encoding::WinAnsiEncoding => Some(&UNICODE_TO_WINANSI),
@@ -136,6 +138,7 @@ impl ReverseMap {
 
 lazy_static! {
     static ref UNICODE_TO_STANDARD: ReverseMap = ReverseMap::new(&STANDARD);
+    static ref UNICODE_TO_MACEXPERT: ReverseMap = ReverseMap::new(&MACEXPERT);
     static ref UNICODE_TO_SYMBOL: ReverseMap = ReverseMap::new(&SYMBOL);
     static ref UNICODE_TO_ZDINGBAT: ReverseMap = ReverseMap::new(&ZDINGBAT);
     static ref UNICODE_TO_WINANSI: ReverseMap = ReverseMap::new(&WINANSI);
@@ -170,6 +173,7 @@ pub static SYMBOL: ForwardMap = ForwardMap(include!("symbol.rs"));
 pub static ZDINGBAT: ForwardMap = ForwardMap(include!("zdingbat.rs"));
 pub static WINANSI: ForwardMap = ForwardMap(include!("cp1252.rs"));
 pub static MACROMAN: ForwardMap = ForwardMap(include!("macroman.rs"));
+pub static MACEXPERT: ForwardMap = ForwardMap(include!("macexpert.rs"));
 
 
 #[test]
