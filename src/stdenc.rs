@@ -1,4 +1,7 @@
-[
+use crate::{ForwardMap, c};
+
+
+pub static STANDARD: ForwardMap = ForwardMap([
           None,          None,          None,          None,          None,          None,          None,          None,
           None,          None,          None,          None,          None,          None,          None,          None,
           None,          None,          None,          None,          None,          None,          None,          None,
@@ -31,4 +34,4 @@
  c('\u{0141}'), c('\u{00D8}'), c('\u{0152}'), c('\u{00BA}'),          None,          None,          None,          None,
           None, c('\u{00E6}'),          None,          None,          None, c('\u{0131}'),          None,          None,
  c('\u{0142}'), c('\u{00F8}'), c('\u{0153}'), c('\u{00DF}'),          None,          None,          None,          None,
-]
+]);

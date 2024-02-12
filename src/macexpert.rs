@@ -1,4 +1,7 @@
-[
+use crate::{ForwardMap, c};
+
+
+pub static MACEXPERT: ForwardMap = ForwardMap([
          None,          None,          None,          None,          None,          None,          None,          None,
          None,          None,          None,          None,          None,          None,          None,          None,
          None,          None,          None,          None,          None,          None,          None,          None,
@@ -31,4 +34,4 @@ c('\u{2077}'), c('\u{2079}'), c('\u{2070}'),          None, c('\u{F6EC}'), c('\u
          None, c('\u{F6ED}'), c('\u{F6F2}'), c('\u{F6EB}'),          None,          None,          None,          None,
          None, c('\u{F6EE}'), c('\u{F6FB}'), c('\u{F6F4}'), c('\u{F7AF}'), c('\u{F6EA}'), c('\u{207F}'), c('\u{F6EF}'),
 c('\u{F6E2}'), c('\u{F6E8}'), c('\u{F6F7}'), c('\u{F6FC}'),          None,          None,          None,          None,
-]
+]);

@@ -1,4 +1,7 @@
-[
+use crate::{ForwardMap, c};
+
+
+pub static ZDINGBAT: ForwardMap = ForwardMap([
           None,          None,          None,          None,          None,          None,          None,          None,
           None,          None,          None,          None,          None,          None,          None,          None,
           None,          None,          None,          None,          None,          None,          None,          None,
@@ -31,4 +34,4 @@
  c('\u{27A8}'), c('\u{27A9}'), c('\u{27AA}'), c('\u{27AB}'), c('\u{27AC}'), c('\u{27AD}'), c('\u{27AE}'), c('\u{27AF}'),
           None, c('\u{27B1}'), c('\u{27B2}'), c('\u{27B3}'), c('\u{27B4}'), c('\u{27B5}'), c('\u{27B6}'), c('\u{27B7}'),
  c('\u{27B8}'), c('\u{27B9}'), c('\u{27BA}'), c('\u{27BB}'), c('\u{27BC}'), c('\u{27BD}'), c('\u{27BE}'),          None,
-]
+]);

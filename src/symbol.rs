@@ -1,4 +1,7 @@
-[
+use crate::{ForwardMap, c};
+
+
+pub static SYMBOL: ForwardMap = ForwardMap([
           None,          None,          None,          None,          None,          None,          None,          None,
           None,          None,          None,          None,          None,          None,          None,          None,
           None,          None,          None,          None,          None,          None,          None,          None,
@@ -31,4 +34,4 @@
  c('\u{F8ED}'), c('\u{F8EE}'), c('\u{F8EF}'), c('\u{F8F0}'), c('\u{F8F1}'), c('\u{F8F2}'), c('\u{F8F3}'), c('\u{F8F4}'),
           None, c('\u{232A}'), c('\u{222B}'), c('\u{2320}'), c('\u{F8F5}'), c('\u{2321}'), c('\u{F8F6}'), c('\u{F8F7}'),
  c('\u{F8F8}'), c('\u{F8F9}'), c('\u{F8FA}'), c('\u{F8FB}'), c('\u{F8FC}'), c('\u{F8FD}'), c('\u{F8FE}'),          None,
-]
+]);

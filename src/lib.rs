@@ -148,12 +148,17 @@ lazy_static! {
 #[derive(Copy, Clone)]
 pub struct Entry(NonZeroU32);
 impl Entry {
-    const fn new(c: char) -> Entry {
-        Entry(
-            unsafe {
-                NonZeroU32::new_unchecked(c as u32)
-            }
-        )
+    const fn new(c: char) -> Option<Entry> {
+        let n = c as u32;
+        if n == 0 {
+            None
+        } else {
+            Some(Entry(
+                unsafe {
+                    NonZeroU32::new_unchecked(n)
+                }
+            ))
+        }
     }
     pub fn as_char(&self) -> char {
         std::char::from_u32(self.0.get()).unwrap()
@@ -165,15 +170,22 @@ impl Entry {
         
 // we rely on the encoding not producing '\0'.
 const fn c(c: char) -> Option<Entry> {
-    Some(Entry::new(c))
+    Entry::new(c)
 }
 
-pub static STANDARD: ForwardMap = ForwardMap(include!("stdenc.rs"));
-pub static SYMBOL: ForwardMap = ForwardMap(include!("symbol.rs"));
-pub static ZDINGBAT: ForwardMap = ForwardMap(include!("zdingbat.rs"));
-pub static WINANSI: ForwardMap = ForwardMap(include!("cp1252.rs"));
-pub static MACROMAN: ForwardMap = ForwardMap(include!("macroman.rs"));
-pub static MACEXPERT: ForwardMap = ForwardMap(include!("macexpert.rs"));
+mod stdenc;
+mod macexpert;
+mod symbol;
+mod zdingbat;
+mod macroman;
+mod cp1252;
+
+pub use stdenc::STANDARD;
+pub use macexpert::MACEXPERT;
+pub use symbol::SYMBOL;
+pub use macroman::MACROMAN;
+pub use cp1252::WINANSI;
+pub use zdingbat::ZDINGBAT;
 
 
 #[test]
